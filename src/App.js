@@ -49,10 +49,8 @@ function App() {
         <Navbar title="TextUtilities" mode={mode} toggleMode={toggleMode}/>
         <Alert alert={alert}/>
         <Routes>
-          <Route path='/TextUtilities' element={<TextForm mode={mode} showAlert={showAlert} heading="Enter the text to analyze" />}/>
-          {/* <TextForm mode={mode} showAlert={showAlert} heading="Enter the text to analyze" /> */}
-
-          <Route path='/about' element={<About/>}/>
+          <Route path='/TextUtilities' element={<TextForm mode={mode} showAlert={showAlert} heading="Text Utilities - Word, Character Counter and Much More..." />}/>
+          <Route path='/about' element={<About mode={mode}/>}/>
         </Routes>
       </Router>
     </>

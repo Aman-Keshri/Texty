@@ -61,10 +61,9 @@ export default function TextForm(props) {
       props.showAlert("No Text to Copy", "warning");
     }
     else{
-      console.log("Copy Text");
-      let text = document.getElementById("exampleFormControlTextarea1");
-      text.select();
-      navigator.clipboard.writeText(text.value);
+      
+      navigator.clipboard.writeText(text);
+      
       props.showAlert("Copied to Clipboard!", "success");
     }
   }
@@ -88,22 +87,22 @@ export default function TextForm(props) {
 
   return (
     <>
-      <div className="container">   
-        <h1>{props.heading}</h1> 
+      <div className="container my-4">   
+        <h1 className='mb-4'>{props.heading}</h1> 
         <div className="mb-3">
           <textarea className="form-control" value ={text} style = {{backgroundColor: props.mode === 'dark' ? '#042743':'white', color: props.mode === 'dark' ? 'white':'black'}} placeholder="Enter Your Text here" onChange={handleOnChange} id="exampleFormControlTextarea1" rows="8"></textarea>
         </div>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleUpClick}>Convert to UpperCase</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleLowClick}>Convert to LowerCase</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleCamelCase}>Convert to CamelCase</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleCopy}>Copy Text</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleExtraSpace}>Remove Extra Space</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleClear}>Clear</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleUpClick}>Convert to UpperCase</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleLowClick}>Convert to LowerCase</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleCamelCase}>Convert to CamelCase</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleCopy}>Copy Text</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleExtraSpace}>Remove Extra Space</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleClear}>Clear</button>
       </div>
 
       <div className="container my-4">
         <h2>Your Text Summary</h2>
-        <p>{text.trim().length > 0 ? text.trim().split(" ").length : 0} Words, {text.trim().length} Characters</p>
+        <p>{text.trim().length > 0 ? text.trim().split(/\s+/).length : 0} Words, {text.trim().length} Characters</p>
         <p>{text.trim().length > 0 ? 0.008 * text.trim().split(" ").length : 0} Minute Read</p>
 
         {text.length > 0 ? <h3>Preview</h3>:<h3> </h3>}
